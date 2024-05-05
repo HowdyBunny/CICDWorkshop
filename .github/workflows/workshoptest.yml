@@ -24,7 +24,7 @@ jobs:
               id: slack 
               uses: slackapi/slack-github-action@v1.26.0
               with: 
-                channel-name: "#workshopsubtest" 
+                channel-id: "C071M1LB3DM" 
                 payload: |
                     {
                         "blocks": [
