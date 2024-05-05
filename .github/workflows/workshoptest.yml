@@ -10,12 +10,11 @@ jobs:
         steps:
             - uses: actions/checkout@v3
               with: 
-                ref: ${{github.ref}} 
+                ref: ${{ github.ref }} 
             - name: Run trivy scanner
               uses: aquasecurity/trivy-action@master
               with:
                 scan-type: 'fs'
-                scan-path: './'
                 severity: 'HIGH'
                 exit-code: '0'
                 format: 'table'
