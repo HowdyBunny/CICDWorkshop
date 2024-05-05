@@ -24,18 +24,20 @@ jobs:
               id: slack 
               uses: slackapi/slack-github-action@v1.26.0
               with: 
-                slack-bot-user-oauth-access-token: ${{ secrets.CICDTEST_BYMYSELF_TOKEN }}
+                
                 channel-id: "C071M1LB3DM"
-                blocks: |
-                    [
-                        {
-                            "type": "section",
-                            "text": {
-                                "type": "mrkdwn",
-                                "text": "Ref: ${{ github.ref }}\nEvent: ${{ github.event_name }}\nCommit: ${{ github.sha }}\nActions URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\n\nFailed trivy scan, see uploaded report."
+                payload: |
+                    {
+                        "blocks": [
+                            {
+                                "type": "section",
+                                "text": {
+                                    "type": "mrkdwn",
+                                    "text": "Ref: ${{ github.ref }}\nEvent: ${{ github.event_name }}\nCommit: ${{ github.sha }}\nActions URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\n\nFailed trivy scan, see uploaded report."
+                                }
                             }
-                        }
-                    ]
+                        ]
+                    }
               env:
                 SLACK_BOT_TOKEN: ${{ secrets.CICDTEST_BYMYSELF_TOKEN}}
                 
