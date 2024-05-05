@@ -24,10 +24,10 @@ jobs:
               id: slack 
               uses: slackapi/slack-github-action@v1.26.0
               with: 
-                
                 channel-id: "C071M1LB3DM"
                 payload: |
                     {
+                        "text": "GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}",
                         "blocks": [
                             {
                                 "type": "section",
@@ -39,5 +39,5 @@ jobs:
                         ]
                     }
               env:
-                SLACK_BOT_TOKEN: ${{ secrets.CICDTEST_BYMYSELF_TOKEN}}
+                SLACK_BOT_TOKEN: ${{ secrets.CICDTEST_BYMYSELF}}
                 
