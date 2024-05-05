@@ -15,7 +15,7 @@ jobs:
               uses: aquasecurity/trivy-action@master
               with:
                 scan-type: 'fs'
-                severity: 'HIGH'
+                severity: 'CRITICAL'
                 exit-code: '0'
                 format: 'table'
                 output: 'trivy-results.txt'
@@ -23,44 +23,21 @@ jobs:
             - name: Send Slack Notification
               id: slack 
               uses: slackapi/slack-github-action@v1.26.0
-              env:
-                SLACK_WEBHOOK_URL: ${{ secrets.CICDTEST_BYMYSELF }} #need to change!!
-                run: |
-                    TRIVY_REPORT=$(cat trivy-results.txt)
-        
-                    COMMIT="${{ github.sha }}"
-                    EVENT="${{ github.event_name }}"
-                    REF="${{ github.ref }}"
-                    ACTIONS_URL="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-                    PAYLOAD=$(cat <<EOF
+              with: 
+                slack-channel: "#channel-name" 
+                payload: |
                     {
+                        "text": "GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}",
                         "blocks": [
-                            {
-                                "type": "section",
-                                "text": {
-                                    "type": "mrkdwn",
-                                    "text": "*CICD App*\nRef: $REF\nEvent: $EVENT\nCommit: $COMMIT\nActions URL: $ACTIONS_URL"
-                                }
-                            },
-                            {
-                                "type": "section",
-                                "text": {
-                                    "type": "mrkdwn",
-                                    "text": "The failed notification\nFailed trivy scan, see uploaded report"
-                                }
+                        {
+                            "type": "section",
+                            "text": {
+                            "type": "mrkdwn",
+                            "text": "GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
                             }
+                        }
                         ]
                     }
-                    EOF
-                    )
-
-                    curl -X POST \
-                    -H "Content-type: application/json" \
-                    --data "$PAYLOAD" \
-                    "$SLACK_WEBHOOK_URL" 
-                    
-                    curl -X POST \
-                    -H "Content-type: multipart/form-data" \
-                    -F "file=@trivy-results.txt" \
-                    -F "initial_comment=Scan report by Zheng Jie Cheng" \
-                    "$SLACK_WEBHOOK_URL"
+              env:
+                SLACK_WEBHOOK_URL: ${{ secrets.CICDTEST_BYMYSELF }} #need to change!!
+            
