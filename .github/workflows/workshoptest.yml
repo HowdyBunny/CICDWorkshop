@@ -25,17 +25,15 @@ jobs:
               uses: slackapi/slack-github-action@v1.26.0
               with: 
                 channel-id: "C071M1LB3DM" 
-                payload: |
-                    {
-                        "blocks": [
-                        {
-                            "text": {
-                                "type": "mrkdwn",
-                                "text": "Ref: $REF\nEvent: $EVENT\nCommit: $COMMIT\nActions URL: $ACTIONS_URL\nScan failed - Cheng:\nFailed trivy scan,see uploaded report"
-                            }
-                        }
-                        ]
-                    }
+                
+                run: |
+                    COMMIT="${{ github.sha }}"
+                    EVENT="${{ github.event_name }}"
+                    REF="${{ github.ref }}"
+                    ACTIONS_URL="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+                    curl -X POST -H 'Content-type: application/json' \
+                         --data '{"text":"Ref: $REF\nEvent: $EVENT\nCommit: $COMMIT\nActions URL: $ACTIONS_URL\nScan failed - Cheng:\nFailed trivy scan,see uploaded report"}' \
+                         https://hooks.slack.com/services/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
               env:
-                SLACK_WEBHOOK_URL: ${{ secrets.CICDTEST_BYMYSELF }} #need to change!!
                 SLACK_BOT_TOKEN: ${{ secrets.CICDTEST_BYMYSELF_TOKEN}}
+                
