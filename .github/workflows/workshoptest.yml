@@ -1,0 +1,67 @@
+name: My first workflow
+on:
+    push:
+        branches:
+            -'release/v[0-9]+.[0-9]+'
+jobs:
+    scan:
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v3
+              with: 
+                ref: ${{github.ref}} 
+            - name: Run trivy scanner
+              uses: aquasecurity/trivy-action@master
+              with:
+                scan-type: 'fs'
+                scan-path: './'
+                severity: 'HIGH'
+                exit-code: '0'
+                format: 'table'
+                output: 'trivy-results.txt'
+            
+            - name: Send Slack Notification
+              id: slack 
+              uses: slackapi/slack-github-action@v1.26.0
+              env:
+                SLACK_WEBHOOK_URL: ${{ secrets.CICDTEST_BYMYSELF }} #need to change!!
+                run: |
+                    TRIVY_REPORT=$(cat trivy-results.txt)
+        
+                    COMMIT="${{ github.sha }}"
+                    EVENT="${{ github.event_name }}"
+                    REF="${{ github.ref }}"
+                    ACTIONS_URL="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+                    PAYLOAD=$(cat <<EOF
+                    {
+                        "blocks": [
+                            {
+                                "type": "section",
+                                "text": {
+                                    "type": "mrkdwn",
+                                    "text": "*CICD App*\nRef: $REF\nEvent: $EVENT\nCommit: $COMMIT\nActions URL: $ACTIONS_URL"
+                                }
+                            },
+                            {
+                                "type": "section",
+                                "text": {
+                                    "type": "mrkdwn",
+                                    "text": "The failed notification\nFailed trivy scan, see uploaded report"
+                                }
+                            }
+                        ]
+                    }
+                    EOF
+                    )
+
+                    curl -X POST \
+                    -H "Content-type: application/json" \
+                    --data "$PAYLOAD" \
+                    "$SLACK_WEBHOOK_URL" 
+                    
+                    curl -X POST \
+                    -H "Content-type: multipart/form-data" \
+                    -F "file=@trivy-results.txt" \
+                    -F "initial_comment=Scan report by Zheng Jie Cheng" \
+                    "$SLACK_WEBHOOK_URL"
