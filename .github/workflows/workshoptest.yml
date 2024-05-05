@@ -39,5 +39,5 @@ jobs:
                         ]
                     }
               env:
-                SLACK_BOT_TOKEN: ${{ secrets.CICDTEST_BYMYSELF}}
+                SLACK_BOT_TOKEN: ${{ secrets.CICDTEST_BYMYSELF_TOKEN}}
                 
