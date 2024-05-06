@@ -41,17 +41,17 @@ jobs:
                     }
               env:
                 SLACK_BOT_TOKEN: ${{ secrets.CICDTEST_BYMYSELF_TOKEN}}
-                
 
-            - name: Checkout
-              uses: actions/checkout@v1
-            - run: echo "Test file " > trivy-results.txt
+
+            
             - name: Upload to slack step
               uses: adrey/slack-file-upload-action@master
               with:
                   token: ${{ secrets.CICDTEST_BYMYSELF_TOKEN }}
                   path: trivy-results.txt
                   channel: anothername
+                  filename: trivy-results.txt
+                  filetype: text
                         
 
 
