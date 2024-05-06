@@ -24,7 +24,7 @@ jobs:
               id: slack
               uses: slackapi/slack-github-action@v1.26.0
               with: 
-                channel-id: 'C071M8GEGQP'
+                channel-id: 'C071M1LB3DM'
                 as_user: 'true'
                 payload: |
                     {
@@ -49,7 +49,7 @@ jobs:
               with:
                   token: ${{ secrets.CICDTEST_BYMYSELF_TOKEN }}
                   path: trivy-results.txt
-                  channel: anothername
+                  channel: workshopsubtest
                   filename: trivy-results.txt
                   filetype: text
                         
