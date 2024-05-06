@@ -43,11 +43,22 @@ jobs:
                 SLACK_BOT_TOKEN: ${{ secrets.CICDTEST_BYMYSELF_TOKEN}}
 
             - name: Upload Trivy Scan Report
-              uses: 8398a7/action-slack@v3
+              uses: slackapi/slack-github-action@v1.26.0
               with:
-                  type: file
-                  file: trivy-results.txt
-                  file-comment: 'Scan report by Cheng'  
+                payload: |
+                    {
+                        "blocks": [
+                            {
+                                "type": "file",
+                                "file_id": "${{ steps.slack.outputs.file_id }}",
+                                "initial_comment": "Vulnerability Scan Report"
+                            }
+                        ]
+                    }
               env:
                 SLACK_BOT_TOKEN: ${{ secrets.CICDTEST_BYMYSELF_TOKEN}}
+                
+
+
+            
     
