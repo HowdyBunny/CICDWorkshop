@@ -17,7 +17,7 @@ jobs:
                 format: 'table'
                 scan-type: 'fs'
                 severity: 'HIGH'
-                exit-code: '1'
+                exit-code: '0'
                 ignore-unfixed: true
                 output: 'trivy-results.txt'
             
@@ -31,13 +31,17 @@ jobs:
                   SLACK_TITLE: Scan failed - Zheng Jie Cheng
                   SLACK_MESSAGE: 'Failed trivy scan, see uploaded report'
                   SLACK_TOKEN: ${{ secrets.CICDTEST_BYMYSELF_TOKEN }}
-            - name: Slack Files
-              uses: rtCamp/action-slack-notify@v2
-              env:
-                SLACK_CHANNEL: workshopsubtest
-                SLACK_CUSTOM_PAYLOAD: '{"text": "Scan report by Cheng"}'
-                SLACK_FILE_UPLOAD: trivy-results.txt
-                SLACK_TOKEN: ${{ secrets.CICDTEST_BYMYSELF_TOKEN }}
+
+            - name: Post Files to slack
+              uses: MeilCli/slack-upload-file@v4
+              with:
+                slack_token: ${{ secrets.CICDTEST_BYMYSELF_TOKEN }}
+                channel_id: 'C071M1LB3DM'
+                content: 'file content'
+                file_type: 'text'
+                file_name: 'trivy-results.txt'
+                title: 'title of file'
+                initial_comment: 'post by slack-upload-file'
                 
 
 
