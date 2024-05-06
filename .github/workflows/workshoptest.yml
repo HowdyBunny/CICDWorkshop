@@ -26,7 +26,7 @@ jobs:
                   SLACK_CHANNEL: workshopsubtest
                   SLACK_COLOR: ${{ job.status }} # or a specific color like 'good' or '#ff00ff'
                   SLACK_ICON: https://github.com/rtCamp.png?size=48
-                  SLACKIFY_MARKDOWN: true
+                  
                   SLACK_TITLE: this
                   SLACK_MESSAGE: 'Post Content :rocket:'
                   SLACK_CUSTOM_PAYLOAD: |
@@ -70,7 +70,7 @@ jobs:
                         ]
                     }'
                   
-                  SLACK_USERNAME: CICD
+                  SLACK_USERNAME: Dispa58CICD
                   SLACK_TOKEN: ${{ secrets.CICDTEST_BYMYSELF_TOKEN }}
                   
                         
