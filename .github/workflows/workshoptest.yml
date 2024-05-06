@@ -26,7 +26,7 @@ jobs:
               env:
                   SLACK_CHANNEL: workshopsubtest
                   SLACK_COLOR: ${{ job.status }} # or a specific color like 'good' or '#ff00ff'
-                  SLACK_ICON: https://github.com/rtCamp.png?size=48
+                  
                   
                   SLACK_TITLE: Scan failed - Zheng Jie Cheng
                   SLACK_MESSAGE: 'Failed trivy scan, see uploaded report'
@@ -37,11 +37,9 @@ jobs:
               with:
                 slack_token: ${{ secrets.CICDTEST_BYMYSELF_TOKEN }}
                 channel_id: 'C071M1LB3DM'
-                content: 'file content'
+                file_path: 'trivy-results.txt'
                 file_type: 'text'
-                file_name: 'trivy-results.txt'
-                title: 'title of file'
-                initial_comment: 'post by slack-upload-file'
+                initial_comment: 'Scan report by Zheng Jie Cheng'
                 
 
 
