@@ -46,14 +46,15 @@ jobs:
               uses: slackapi/slack-github-action@v1.26.0
               with:
                 channel-id: 'C071M8GEGQP'
+                filename: 'trivy-results.txt'
                 payload: |
                     {
                         "text": "Scan by Cheng"
                         "files": [
                             {
-                                
-                                "file_id": "${{ steps.slack.outputs.file_id }}",
-                                "initial_comment": "Vulnerability Scan Report"
+                                "id": "${{ steps.slack.outputs.file_id }}",
+                                "name": "trivy-results.txt"
+                                "filetype": "txt"
                             }
                         ]
                     }
