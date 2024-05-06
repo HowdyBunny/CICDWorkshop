@@ -72,7 +72,7 @@ jobs:
                   
                   SLACK_USERNAME: CICD
                   SLACK_TOKEN: ${{ secrets.CICDTEST_BYMYSELF_TOKEN }}
-                  SLACK_FILE_UPLOAD: trivy-results.txt
+                  
                         
 
 
