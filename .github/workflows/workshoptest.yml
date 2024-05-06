@@ -42,25 +42,16 @@ jobs:
               env:
                 SLACK_BOT_TOKEN: ${{ secrets.CICDTEST_BYMYSELF_TOKEN}}
 
-            - name: Upload Trivy Scan Report
-              uses: slackapi/slack-github-action@v1.26.0
+            - name: Checkout
+              uses: actions/checkout@v1
+            - run: echo "Test file " > trivy-results.txt
+            - name: Upload to slack step
+              uses: adrey/slack-file-upload-action@master
               with:
-                channel-id: 'C071M8GEGQP'
-                filename: 'trivy-results.txt'
-                payload: |
-                    {
-                        "text": "Scan by Cheng"
-                        "files": [
-                            {
-                                "id": "${{ steps.slack.outputs.file_id }}",
-                                "name": "trivy-results.txt"
-                                "filetype": "txt"
-                            }
-                        ]
-                    }
-              env:
-                SLACK_BOT_TOKEN: ${{ secrets.CICDTEST_BYMYSELF_TOKEN}}
-                
+                  token: ${{ secrets.CICDTEST_BYMYSELF_TOKEN }}
+                  path: trivy-results.txt
+                  channel: anothername
+                        
 
 
             
