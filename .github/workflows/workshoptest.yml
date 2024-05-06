@@ -16,7 +16,7 @@ jobs:
               with:
                 scan-type: 'fs'
                 severity: 'HIGH'
-                exit-code: '0'
+                exit-code: '1'
                 format: 'table'
                 output: 'trivy-results.txt'
             
@@ -34,7 +34,7 @@ jobs:
               uses: rtCamp/action-slack-notify@v2
               env:
                 SLACK_CHANNEL: workshopsubtest
-                
+                SLACK_CUSTOM_PAYLOAD: '{"text": "Scan report by Cheng"}'
                 SLACK_FILE_UPLOAD: trivy-results.txt
                 SLACK_TOKEN: ${{ secrets.CICDTEST_BYMYSELF_TOKEN }}
                 
