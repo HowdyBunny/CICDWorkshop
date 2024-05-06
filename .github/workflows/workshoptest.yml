@@ -48,6 +48,7 @@ jobs:
                 channel-id: 'C071M8GEGQP'
                 payload: |
                     {
+                        "text": "Scan by Cheng"
                         "files": [
                             {
                                 
