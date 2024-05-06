@@ -45,6 +45,7 @@ jobs:
             - name: Upload Trivy Scan Report
               uses: slackapi/slack-github-action@v1.26.0
               with:
+                channel-id: 'C071M8GEGQP'
                 payload: |
                     {
                         "blocks": [
