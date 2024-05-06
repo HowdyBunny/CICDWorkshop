@@ -14,11 +14,11 @@ jobs:
             - name: Run trivy scanner
               uses: aquasecurity/trivy-action@master
               with:
+                format: 'table'
                 scan-type: 'fs'
                 severity: 'HIGH'
                 exit-code: '1'
                 ignore-unfixed: true
-                format: 'table'
                 output: 'trivy-results.txt'
             
             - name: Slack Notification
