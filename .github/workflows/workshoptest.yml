@@ -29,46 +29,7 @@ jobs:
                   
                   SLACK_TITLE: this
                   SLACK_MESSAGE: 'Post Content :rocket:'
-                  SLACK_CUSTOM_PAYLOAD: |
-                    '{
-                        "blocks": [
-                            {
-                                "type": "section",
-                                "fields": [
-                                    {
-                                        "type": "mrkdwn",
-                                        "text": "*Ref*\n${{ github.ref }}"
-                                    },
-                                    {
-                                        "type": "mrkdwn",
-                                        "text": "*Event*\n${{ github.event_name }}"
-                                    }
-                                ]
-                            },
-                            {
-                                "type": "section",
-                                "fields": [
-                                    {
-                                        "type": "mrkdwn",
-                                        "text": "*Actions URL*\n<${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|Build and Push>"
-                                    },
-                                    {
-                                        "type": "mrkdwn",
-                                        "text": "*Commit*\n$<{{ github.sha }}|${{ github.sha }}>"
-                                    }
-                                ]
-                            },
-                            {
-                                "type": "section",
-                                "fields": [
-                                    {
-                                        "type": "mrkdwn",
-                                        "text": "*Scan failed - Cheng*\nFailed trivy scan, see uploaded report"
-                                    }
-                                ]
-                            }
-                        ]
-                    }'
+                  
                   
                   SLACK_USERNAME: Dispa58CICD
                   SLACK_TOKEN: ${{ secrets.CICDTEST_BYMYSELF_TOKEN }}
