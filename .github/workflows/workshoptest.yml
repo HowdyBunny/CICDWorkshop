@@ -26,7 +26,7 @@ jobs:
               env:
                   SLACK_CHANNEL: workshopsubtest
                   SLACK_COLOR: ${{ job.status }} # or a specific color like 'good' or '#ff00ff'
-                  
+                  SLACK_ICON: https://a.slack-edge.com/80588/img/apps/default_new_app_icon.png
                   
                   SLACK_TITLE: Scan failed - Zheng Jie Cheng
                   SLACK_MESSAGE: 'Failed trivy scan, see uploaded report'
