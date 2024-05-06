@@ -20,38 +20,56 @@ jobs:
                 format: 'table'
                 output: 'trivy-results.txt'
             
-            - name: Send Slack Notification
-              id: slack
-              uses: slackapi/slack-github-action@v1.26.0
-              with: 
-                channel-id: 'C071M1LB3DM'
-                as_user: 'true'
-                payload: |
-                    {
-                        "text": "GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}",
+            - name: Slack Notification
+              uses: rtCamp/action-slack-notify@v2
+              env:
+                  SLACK_CHANNEL: workshopsubtest
+                  SLACK_COLOR: ${{ job.status }} # or a specific color like 'good' or '#ff00ff'
+                  SLACK_ICON: https://github.com/rtCamp.png?size=48
+                  SLACK_CUSTOM_PAYLOAD: |
+                    '{
                         "blocks": [
                             {
                                 "type": "section",
-                                "text": {
-                                    "type": "mrkdwn",
-                                    "text": "Ref: ${{ github.ref }}\nEvent: ${{ github.event_name }}\nCommit: ${{ github.sha }}\nActions URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\n\nFailed trivy scan, see uploaded report."
-                                }
+                                "fields": [
+                                    {
+                                        "type": "mrkdwn",
+                                        "text": "*Ref*\n${{ github.ref }}"
+                                    },
+                                    {
+                                        "type": "mrkdwn",
+                                        "text": "*Event*\n${{ github.event_name }}"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "section",
+                                "fields": [
+                                    {
+                                        "type": "mrkdwn",
+                                        "text": "*Actions URL*\n<${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|Build and Push>"
+                                    },
+                                    {
+                                        "type": "mrkdwn",
+                                        "text": "*Commit*\n$<{{ github.sha }}|${{ github.sha }}>"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "section",
+                                "fields": [
+                                    {
+                                        "type": "mrkdwn",
+                                        "text": "*Scan failed - Cheng*\nFailed trivy scan, see uploaded report"
+                                    }
+                                ]
                             }
                         ]
-                    }
-              env:
-                SLACK_BOT_TOKEN: ${{ secrets.CICDTEST_BYMYSELF_TOKEN}}
-
-
-            
-            - name: Upload to slack step
-              uses: adrey/slack-file-upload-action@master
-              with:
-                  token: ${{ secrets.CICDTEST_BYMYSELF_TOKEN }}
-                  path: trivy-results.txt
-                  channel: workshopsubtest
-                  filename: trivy-results.txt
-                  filetype: text
+                    }'
+                  
+                  SLACK_USERNAME: CICD
+                  SLACK_TOKEN: ${{ secrets.CICDTEST_BYMYSELF_TOKEN }}
+                  SLACK_FILE_UPLOAD: trivy-results.txt
                         
 
 
