@@ -67,6 +67,7 @@ jobs:
                 SLACK_TITLE: Image build and signed
                 SLACKIFY_MARKDOWN: true
                 SLACK_CUSTOM_PAYLOAD: '{
+                    "text": "Image build and signed",
                     "blocks": [
                       {
                         "type": "rich_text",
