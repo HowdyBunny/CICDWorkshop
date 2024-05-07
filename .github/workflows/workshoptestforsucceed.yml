@@ -68,7 +68,7 @@ jobs:
               
               SLACK_TITLE: Image build and signed
               ENABLE_ESCAPES: true
-              SLACK_MESSAGE: '*Name:* Zheng Jie Cheng\n*Metriculation:* A0290838R\n*Email:* e1327869@u.nus.edu\n*Git:* https://github.com/HowdyBunny/CICDWorkshop\n*Image:* https://hub.docker.com/repository/docker/howdybunny/go-fortune/general'
+              SLACK_MESSAGE: '*Name:* Zheng Jie Cheng\n*Metriculation:* A0290838R\n*Email:* e1327869@u.nus.edu\n*Git:* https://github.com/${{ github.repository }}\n*Image:* https://hub.docker.com/repository/docker/howdybunny/go-fortune/general'
               SLACK_WEBHOOK: ${{ secrets.CICDTEST_BYMYSELF }}
               
           

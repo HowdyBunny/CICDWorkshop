@@ -21,14 +21,13 @@ jobs:
                 ignore-unfixed: true
                 output: 'trivy-results.txt'
               
-            - name: Set Failure
-              run: exit 1
+            
 
             - name: Slack Notification
               uses: rtCamp/action-slack-notify@v2
               env:
                   SLACK_CHANNEL: workshopsubtest
-                  SLACK_COLOR: ${{job.status}}
+                  SLACK_COLOR: failure
                   SLACK_ICON: https://a.slack-edge.com/80588/img/apps/default_new_app_icon.png
                   
                   SLACK_TITLE: Scan failed - Zheng Jie Cheng
@@ -43,6 +42,9 @@ jobs:
                 file_path: 'trivy-results.txt'
                 file_type: 'text'
                 initial_comment: 'Scan report by Zheng Jie Cheng'
+            
+            - name: Set Failure
+              run: exit 1
 
             
                 
