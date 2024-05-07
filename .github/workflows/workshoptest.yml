@@ -17,10 +17,13 @@ jobs:
                 format: 'table'
                 scan-type: 'fs'
                 severity: 'HIGH'
-                exit-code: 1
+                exit-code: '1'
                 ignore-unfixed: true
                 output: 'trivy-results.txt'
             
+            -
+              run: exit 1
+              
             - name: Slack Notification
               uses: rtCamp/action-slack-notify@v2
               env:
