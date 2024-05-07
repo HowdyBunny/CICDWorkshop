@@ -66,8 +66,7 @@ jobs:
                 
                 SLACK_TITLE: Image build and signed
                 SLACKIFY_MARKDOWN: true
-                SLACK_CUSTOM_PAYLOAD: '{"text": "Image build and signed",
-                                        "blocks": [
+                SLACK_CUSTOM_PAYLOAD: '{"text": [
                                           {
                                             "type": "rich_text",
                                             "elements": [
@@ -156,7 +155,7 @@ jobs:
                                             ]
                                           }
                                         ]
-                  }'
+                                      }'
                 SLACK_WEBHOOK: ${{ secrets.CICDTEST_BYMYSELF }}
                 
             
