@@ -65,7 +65,6 @@ jobs:
             env:
               SLACK_CHANNEL: workshopsubtest
               SLACK_COLOR: ${{ job.status }}
-              
               SLACK_TITLE: Image build and signed
               ENABLE_ESCAPES: true
               SLACK_MESSAGE: '*Name:* Zheng Jie Cheng\n*Metriculation:* A0290838R\n*Email:* e1327869@u.nus.edu\n*Git:* https://github.com/${{ github.repository }}\n*Image:* https://hub.docker.com/repository/docker/howdybunny/go-fortune/general'
