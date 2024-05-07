@@ -36,7 +36,7 @@ jobs:
               uses: docker/build-push-action@v5
               with:
                 push: true
-                tags: Cheng/go-fortune:${{ github.sha }}
+                tags: howdybunny/go-fortune:${{ github.sha }}
 
             
             
