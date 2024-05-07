@@ -50,10 +50,11 @@ jobs:
                 for tag in ${TAGS}; do
                   images+="${tag}"
                 done
-                cosign sign --yes --key env://COSIGN_PRIVATE_KEY ${images}
+                cosign generate-key-pair
+                cosign sign --yes --key cosign.key ${images}
               env:
-                TAGS: 'HowdyBunny/go-fortune:${{ github.sha }}'
-                COSIGN_PRIVATE_KEY: ${{ secrets.COSIGN_PRIVATE_KEY }}
+                TAGS: 'howdybunny/go-fortune:${{ github.sha }}'
+                
                 
                 
             - name: Slack Notification
