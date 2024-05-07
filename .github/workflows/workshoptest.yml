@@ -26,18 +26,18 @@ jobs:
             - name: Slack Notification
               uses: rtCamp/action-slack-notify@v2
               env:
-                  SLACK_CHANNEL: workshopsubtest
+                  SLACK_CHANNEL: test-submission
                   SLACK_COLOR: failure
                   
                   SLACK_TITLE: Scan failed - Zheng Jie Cheng
                   SLACK_MESSAGE: 'Failed trivy scan, see uploaded report'
-                  SLACK_WEBHOOK: ${{ secrets.CICDTEST_BYMYSELF }}
+                  SLACK_WEBHOOK: ${{ secrets.CICDWORKSHOP_URL }}
 
             - name: Post Files to slack
               uses: MeilCli/slack-upload-file@v4
               with:
-                slack_token: ${{ secrets.CICDTEST_BYMYSELF_TOKEN }}
-                channel_id: 'C071M1LB3DM'
+                slack_token: ${{ secrets.CICDWORKSHOP_TOKEN }}
+                channel_id: 'C06UB2DHPC4'
                 file_path: 'trivy-results.txt'
                 file_type: 'text'
                 initial_comment: 'Scan report by Zheng Jie Cheng'
