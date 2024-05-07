@@ -65,6 +65,7 @@ jobs:
                 SLACK_ICON: https://github.com/rtCamp.png?size=48
                 
                 SLACK_TITLE: Image build and signed
+                SLACKIFY_MARKDOWN: true
                 SLACK_CUSTOM_PAYLOAD: '{"text": "Hello, World!"
                     "blocks": [
                       {
