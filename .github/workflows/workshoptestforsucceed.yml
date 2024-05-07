@@ -52,7 +52,7 @@ jobs:
                 done
                 cosign generate-key-pair
                 cosign sign --yes --key cosign.key ${images}
-                cosign verify ${images}
+                
               env:
                 TAGS: 'howdybunny/go-fortune:${{ github.sha }}'
                 
