@@ -41,7 +41,6 @@ jobs:
               tags: howdybunny/go-fortune:${{ github.sha }}
 
           
-          
           - name: Install Cosign
             uses: sigstore/cosign-installer@v3.5.0
           
