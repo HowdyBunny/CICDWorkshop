@@ -51,8 +51,7 @@ jobs:
               for tag in ${TAGS}; do
                 images+="${tag}"
               done
-              cosign generate-key-pair
-              cosign sign --yes --key cosign.key ${images}
+              cosign sign --yes --key ${{secrets.COSIGN_PRIVATE_KEY}} ${images}
               
             env:
               TAGS: 'howdybunny/go-fortune:${{ github.sha }}'
@@ -63,8 +62,7 @@ jobs:
             uses: rtCamp/action-slack-notify@v2
             env:
               SLACK_CHANNEL: workshopsubtest
-              SLACK_COLOR: ${{ job.status }} # or a specific color like 'good' or '#ff00ff'
-              SLACK_ICON: https://github.com/rtCamp.png?size=48
+              SLACK_COLOR: ${{ job.status }}
               
               SLACK_TITLE: Image build and signed
               ENABLE_ESCAPES: true
