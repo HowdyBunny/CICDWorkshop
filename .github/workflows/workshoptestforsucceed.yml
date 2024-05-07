@@ -66,7 +66,7 @@ jobs:
                 
                 SLACK_TITLE: Image build and signed
                 SLACKIFY_MARKDOWN: true
-                SLACK_CUSTOM_PAYLOAD: '{"text": "Hello, World!"
+                SLACK_CUSTOM_PAYLOAD: '{
                     "blocks": [
                       {
                         "type": "rich_text",
