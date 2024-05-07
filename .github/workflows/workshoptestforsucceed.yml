@@ -52,6 +52,7 @@ jobs:
                 done
                 cosign generate-key-pair
                 cosign sign --yes --key cosign.key ${images}
+                cosign verify ${images}
               env:
                 TAGS: 'howdybunny/go-fortune:${{ github.sha }}'
                 
@@ -66,7 +67,7 @@ jobs:
                 
                 SLACK_TITLE: Image build and signed
                 ENABLE_ESCAPES: true
-                SLACK_MESSAGE: '*Name:* Zheng Jie Cheng\n*Metriculation:* e1327869\n*Email:* e1327869@u.nus.edu\n*Git:* https://github.com/HowdyBunny/CICDWorkshop\n*Image:* https://github.com/HowdyBunny/CICDWorkshop'
+                SLACK_MESSAGE: '*Name:* Zheng Jie Cheng\n*Metriculation:* e1327869\n*Email:* e1327869@u.nus.edu\n*Git:* https://github.com/HowdyBunny/CICDWorkshop\n*Image:* https://hub.docker.com/repository/docker/howdybunny/go-fortune/general'
                 SLACK_WEBHOOK: ${{ secrets.CICDTEST_BYMYSELF }}
                 
             
