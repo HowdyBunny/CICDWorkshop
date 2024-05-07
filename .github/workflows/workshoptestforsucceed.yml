@@ -66,7 +66,7 @@ jobs:
                 
                 SLACK_TITLE: Image build and signed
                 
-                SLACK_MESSAGE: '*Name:* Zheng Jie Cheng/n*Metriculation:* e1327869/n*Email:* e1327869@u.nus.edu/n*Git:* https://github.com/HowdyBunny/CICDWorkshop /n*Image:* https://github.com/HowdyBunny/CICDWorkshop'
+                SLACK_MESSAGE: '*Name:* Zheng Jie Cheng\n*Metriculation:* e1327869\n*Email:* e1327869@u.nus.edu\n*Git:* https://github.com/HowdyBunny/CICDWorkshop\n*Image:* https://github.com/HowdyBunny/CICDWorkshop'
                 SLACK_WEBHOOK: ${{ secrets.CICDTEST_BYMYSELF }}
                 
             
