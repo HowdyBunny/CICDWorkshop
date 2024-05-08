@@ -64,7 +64,7 @@ jobs:
           - name: Slack Notification
             uses: rtCamp/action-slack-notify@v2
             env:
-              SLACK_CHANNEL: test-submission
+              SLACK_CHANNEL: submission
               SLACK_COLOR: ${{ job.status }}
               SLACK_TITLE: Image build and signed
               ENABLE_ESCAPES: true
