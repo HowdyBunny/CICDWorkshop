@@ -24,6 +24,7 @@ jobs:
               output: 'trivy-results.txt'
             
           - name: Pass output
+            if: failure()
             uses: actions/upload-artifact@v2
             with:
               name: trivy-report.txt
