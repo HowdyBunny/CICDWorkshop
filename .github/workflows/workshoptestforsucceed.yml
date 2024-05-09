@@ -50,7 +50,7 @@ jobs:
             uses: actions/download-artifact@v2
             with:
               name: trivy-report.txt
-              path: trivy-report.txt
+              path: .
 
           - name: Post Files to slack
             uses: MeilCli/slack-upload-file@v4
