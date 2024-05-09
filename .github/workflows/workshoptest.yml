@@ -27,8 +27,8 @@ jobs:
             if: failure()
             uses: actions/upload-artifact@v2
             with:
-              name: trivy-report.txt
-              path: trivy-report.txt
+              name: trivy-results.txt
+              path: trivy-results.txt
           
     FailureSEND:
       needs: SCAN
@@ -49,7 +49,7 @@ jobs:
           - name: Download artifact
             uses: actions/download-artifact@v2
             with:
-              name: trivy-report.txt
+              name: trivy-results.txt
               path: .
 
           - name: Post Files to slack
