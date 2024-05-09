@@ -44,6 +44,13 @@ jobs:
                 SLACK_MESSAGE: 'Failed trivy scan, see uploaded report'
                 SLACK_WEBHOOK: ${{ secrets.CICDTEST_BYMYSELF }} #need change
 
+
+          - name: Download artifact
+            uses: actions/download-artifact@v2
+            with:
+              name: trivy-report.txt
+              path: trivy-report.txt
+
           - name: Post Files to slack
             uses: MeilCli/slack-upload-file@v4
             with:
