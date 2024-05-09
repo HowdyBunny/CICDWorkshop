@@ -38,12 +38,12 @@ jobs:
           - name: Slack Notification
             uses: rtCamp/action-slack-notify@v2
             env:
-                SLACK_CHANNEL: workshopsubtest # need to change
+                SLACK_CHANNEL: submission # need to change
                 SLACK_COLOR: failure
                 
                 SLACK_TITLE: Scan failed - Zheng Jie Cheng
                 SLACK_MESSAGE: 'Failed trivy scan, see uploaded report'
-                SLACK_WEBHOOK: ${{ secrets.CICDTEST_BYMYSELF }} #need change
+                SLACK_WEBHOOK: ${{ secrets.CICDWORKSHOP_URL }} #need change
 
 
           - name: Download artifact
@@ -55,8 +55,8 @@ jobs:
           - name: Post Files to slack
             uses: MeilCli/slack-upload-file@v4
             with:
-              slack_token: ${{ secrets.CICDTEST_BYMYSELF_TOKEN }} #need change
-              channel_id: 'C071M1LB3DM' #need change
+              slack_token: ${{ secrets.CICDWORKSHOP_TOKEN }} #need change
+              channel_id: 'C06U8J674SE' #need change
               file_path: 'trivy-results.txt'
               file_type: 'text'
               initial_comment: 'Scan report by Zheng Jie Cheng'
@@ -71,7 +71,7 @@ jobs:
       if: success()
       steps:
           - uses: actions/checkout@v3
-          
+
           - name: Set up QEMU
             uses: docker/setup-qemu-action@v3
           - name: Set up Docker Buildx
@@ -111,12 +111,12 @@ jobs:
           - name: Slack Notification
             uses: rtCamp/action-slack-notify@v2
             env:
-              SLACK_CHANNEL: workshopsubtest #need change
+              SLACK_CHANNEL: submission #need change
               SLACK_COLOR: ${{ job.status }}
               SLACK_TITLE: Image build and signed
               ENABLE_ESCAPES: true
               SLACK_MESSAGE: '*Name:* Zheng Jie Cheng\n*Metriculation:* A0290838R\n*Email:* e1327869@u.nus.edu\n*Git:* https://github.com/${{ github.repository }}\n*Image:* https://hub.docker.com/repository/docker/howdybunny/go-fortune'
-              SLACK_WEBHOOK: ${{ secrets.CICDTEST_BYMYSELF }} #need change
+              SLACK_WEBHOOK: ${{ secrets.CICDWORKSHOP_URL }} #need change
 
 
             
